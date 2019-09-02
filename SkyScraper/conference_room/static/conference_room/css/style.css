@@ -1,0 +1,58 @@
+body {
+    height: 100%;
+    margin-top: 7rem;   
+    background: no-repeat, fixed, linear-gradient(135deg, rgba(173,58,250,1) 0%, rgba(0,155,212,1) 50%, rgba(0,255,119,1) 100%);
+}
+
+
+.purpleTr {
+    color: rgba(173,58,250,1);
+    height: 48px;
+    text-align: center;
+}
+
+.purpleTr th{
+    width: 54px;
+    font-size: 1.1rem !important;
+}
+
+.darkTr {
+    color: black;
+    height: 48px;
+    width: 54px;
+    text-align: center;
+}
+
+.darkTr th{
+    width: 54px;
+    font-size: 1.1rem !important;
+}
+
+.date {
+    background: no-repeat, fixed, linear-gradient(135deg, rgba(173,58,250,1) 0%, rgba(0,155,212,1) 50%, rgba(0,255,119,1) 100%);
+}
+  #date{
+    font-size:50px;
+    color:#ECECE7;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:500;
+    float:right;
+  }
+  #day{
+    color:#232227;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:400;
+  }
+  #month{
+    color:#232227;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:200;
+  }
+
+  .input-text {
+    margin: .375rem;
+    border: none;
+    border-bottom: 1px #e0e0e0 solid;
+  }
+
+  

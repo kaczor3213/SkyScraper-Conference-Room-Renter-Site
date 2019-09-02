@@ -1,0 +1,33 @@
+<!--Card-->
+
+<div class="card">
+
+    <!--Card image-->
+    <div class="view overlay">
+        <img src="/static/conference_room/img/rooms/{{r_img}}" class="card-img-top" alt="">
+        <a href="{{r_id}}/">
+          <div class="mask rgba-white-slight waves-effect waves-light"></div>
+        </a>
+    </div>
+    <!--Card content-->
+    <div class="card-body">
+      <!--Title-->
+      <h4 class="card-title">{{r_name}}</h4>
+      <!--Text-->
+      <p class="card-text">{{r_status}}</p>
+      <p class="card-text text-truncate">{{r_description}}</p>
+      <i class="fas fa-check"></i>
+      <a href="{{r_id}}" class="btn btn-primary btn-md waves-effect waves-light">Sprawdź dostępność
+        <i class="fas fa-calendar-alt ml-2"></i>
+      </a>
+      <a href="modify/{{r_id}}" class="btn btn-warning btn-md waves-effect waves-light">Modyfikuj
+        <i class="fas fa-cog ml-2"></i>
+      </a>
+      <a href="delete/{{r_id}}" class="btn btn-danger btn-md waves-effect waves-light">Usuń
+          <i class="fas fa-trash-alt ml-2"></i>
+      </a>
+    </div>
+
+  </div>
+  
+  <!--/.Card-->

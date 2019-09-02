@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>ConferenceRoomManager</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  {% load static %}
+  <link href="{% static 'conference_room/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'conference_room/css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{% static 'conference_room/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+      <a class="navbar-brand" href="/rooms/">
+        <img src="/static/conference_room/img/skyscraper.png" height="40" alt="SkyScraper logo">
+      </a>
+      <a class="navbar-brand" href="/rooms/"><strong>Sale</strong></a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="reserve/">Rezerwacja</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="create/">Dodaj nową salę</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+  </header>
+  <!--Main Navigation-->
+
+
+  <!-- Start your project here-->
+  
+  {{navbar| safe}}
+  
+    <!--Section: Cards-->
+    <section class="text-center">
+        <form method="post">
+          <!--Grid row-->
+          <div class="row mb-4 w-100 wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; animation-iteration-count: 1;">
+  
+            <!--Grid column-->
+            <div class="col-md-10 offset-md-1 mb-4">
+  
+              <!--Data-->
+                          
+              <!-- News jumbotron -->
+              <div class="jumbotron text-center hoverable p-4">
+  
+                <!-- Grid row -->
+                <div class="row">
+  
+                  <!-- Grid column -->
+                  <div class="col-sm-3 m-3">
+  
+                    <!-- Featured image -->
+                    <div class="view overlay">
+                      <img src="/static/conference_room/img/rooms/sala_504.jpg" class="img-fluid">
+                    </div>
+  
+                  </div>
+                  <!-- Grid column -->
+  
+                  <!-- Grid column -->
+                  <div class="col-sm-4 m-3">
+                    <div class="card">
+                      <div class="card-body">
+                        <!--Title-->
+                        <h4 class="card-title">{{r_name}}</h4>
+                        <!--Text-->
+                        <p class="card-text text-truncate">{{r_description}}</p>
+                        <p class="card-text text-truncate">Status rezerwacji: {{r_status| safe}}</p>
+                        <div class="form-group">
+                            <label >Data rezerwacji:</label>
+                            <input type="date" name="reservation_date" min="{{min_date}}" max="{{max_date}}" class="form-control" required>
+                        </div>
+                        <a href="/rooms/" class="btn btn-light btn-md waves-effect waves-light">
+                          <i class="fas fa-chevron-circle-left"></i>
+                          Powrót do menu
+                        </a>
+                        {% csrf_token %}
+                        <button value="{{r_id}}" class="btn btn-success btn-md waves-effect waves-light" type="submit">Rezerwuj
+                          <i class="fas fa-calendar-alt ml-2"></i>
+                        </button>
+                      </div>     
+                    </div>   
+                  </div>
+                  <!-- Grid column -->
+  
+                  <!-- Grid column -->
+                  <div class="col-sm-4 text-md-left my-3 mx-4 p-0 ">
+                    <div class="card">
+                      <div class="container">
+                        <div class="row">
+                          <div class="month p-4 col-8">
+                            <table class="w-100">
+                              <tr class="purpleTr">
+                                <th>Pn</th>
+                                <th>Wt</th>
+                                <th>Śr</th>
+                                <th>Cz</th>
+                                <th>Pt</th>
+                                <th>Sb</th>
+                                <th>Nd</th>
+                              </tr>
+                              <!--Basic Week X 5-->
+                              <tr class="darkTr">
+                                <th></th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                              </tr>
+                              <!--Basic Week-->
+                            </table>
+                          </div>
+                          <div class="date py-3 px-3 col-4">
+                            <div id="date">1</div>
+                            <div class="h5" id="day">Niedziela</div>
+                            <div  class="h5" id="month">Wrzesień</div>
+                            <i class="fa fa-pencil edit" aria-hidden="true"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+              </div>
+              <!-- News jumbotron -->
+            </div>
+            <!--Grid column-->
+          </div>
+          <!--Grid row-->
+        </form>
+      </section>
+      <!--Section: Cards-->
+  
+  {{footer| safe}}
+  
+  <!-- Start your project here-->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static 'conference_room/js/jquery-3.4.1.min.js' %}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'conference_room/js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'conference_room/js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'conference_room/js/mdb.min.js' %}"></script>
+</body>
+
+</html>

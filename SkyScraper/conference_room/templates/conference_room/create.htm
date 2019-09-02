@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>ConferenceRoomManager</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  {% load static %}
+  <link href="{% static 'conference_room/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'conference_room/css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{% static 'conference_room/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+      <a class="navbar-brand" href="/rooms/">
+        <img src="/static/conference_room/img/skyscraper.png" height="40" alt="SkyScraper logo">
+      </a>
+      <a class="navbar-brand" href="/rooms/"><strong>Sale</strong></a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="reserve/">Rezerwacja</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="create/">Dodaj nową salę</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+  </header>
+  <!--Main Navigation-->
+
+
+  <!-- Start your project here-->
+
+    <!--Section: Cards-->
+    <section class="text-center">
+
+      <!--Form-->
+        <form method="post">
+          {% csrf_token %}
+
+          <!--Grid row-->
+          <div class="row mb-4 w-100 wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; animation-iteration-count: 1;">
+  
+            <!--Grid column-->
+            <div class="col-md-10 offset-md-1 mb-4">
+  
+              <!--Data-->
+                          
+              <!-- News jumbotron -->
+              <div class="jumbotron text-center hoverable p-4">
+  
+
+                    <div class="card">
+                      <div class="card-body">
+                        <!--Title-->
+                        <h4 class="card-title">Wypełnij formularz</h4>
+                        <p class="card-text">Numder identyfikacyjny sali jest generowany automatycznie.</p>
+
+                        <!--Inputs, Row-->
+                        <div class="row">
+                          
+                          <!--Image input, Left Column-->
+                          <div class="form-group col-md-4">
+                            <label>
+                              <h5>Zjdęcie sali</h5>
+                              <div id="image_input_tmp_wrapper">
+                                <svg id="image_input_tmp" class="d-block bd-placeholder-img img-fluid" width="300" height="300" role="img" aria-label="Placeholder: 300x300">
+                                  <title>Placeholder</title>
+                                  <rect width="100%" height="100%" fill="#868e96"></rect>
+                                  <text x="50%" y="50%" fill="#dee2e6" dx="-1.3em" dy=".3em">300x300</text>
+                                </svg>
+                              </div>
+                              <img hidden id="image_input_view" src="" alt="Room Image" class="img-fluid" height="300" width="300">
+                              <div class="file-field">
+                                <div class="btn btn-primary btn-sm float-left">
+                                  <span>Wybierz plik</span>
+                                  <input type="file" name="image" onchange="previewFile()" accept="image/*" id="image_input_button" hidden>
+                                </div>
+                                <input class="float-right input-text" id="image_input_text" type="text" placeholder="Upload your file">
+                              </div>
+                            </label>
+                          </div>
+                          <!--Image input, Left Column-->
+
+                          <!--Column-->
+                          <div class="col-md-4">
+
+                            <!--Name input-->
+                            <div class="form-group text-left">
+                              <label>
+                                <h5>Nazwa sali</h5>
+                                <input class="input-text" type="text" name="name" placeholder="Twoja nazwa sali" required>
+                              </label>
+                            </div>
+                            <!--Name input-->
+
+                            <!--Capacity input-->
+                            <div class="form-group text-left">
+                              <label>
+                                <h5>Pojemność sali</h5>
+                                <input class="input-text" type="number" name="capacity" min=5 placeholder=">=5" required>
+                              </label>
+                            </div>
+                            <!--Capacity input-->
+
+                            <!--Projector input-->
+                            <div class="form-group text-left">
+                              <h5>Czy sala ma projektor?</h5>
+                              <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" value="1" id="Yes" name="projector" required>
+                                <label class="custom-control-label" for="Yes">Tak</label>
+                              </div>
+
+                              <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" value="0" id="No" name="projector" required>
+                                <label class="custom-control-label" for="No">Nie</label>
+                              </div>
+                            </div>
+                            <!--Projector input-->
+
+                          </div>
+                          <!--Column-->
+                          
+                          <!--Column, Description-->
+                          <div class="form-group col-md-4">
+                            <label for="description">Opis sali</label>
+                            <textarea class="form-control rounded-0" id="description" name="description" rows="10" placeholder="Przykładowy opis sali..." required></textarea>
+                          </div>
+                          <!--Column, Description-->
+
+                        </div>
+                        <!--Inputs-->
+
+                        <!--Cancel-->
+                        <a href='/rooms/' class="btn btn-danger btn-md waves-effect waves-light">
+                          Anuluj
+                          <i class="fas fa-times ml-2"></i>
+                        </a>
+                        <!--Cancel-->
+
+                        <!--Reset-->
+                        <button type="reset" class="btn btn-info btn-md waves-effect waves-light">
+                          Wyczyść dane
+                          <i class="fas fa-redo ml-2"></i>
+                        </button>
+                        <!--Reset-->
+
+                        <!--Submit-->
+                        <button value="{{r_id}}" class="btn btn-success btn-md waves-effect waves-light" type="submit">
+                          Utwórz salę
+                          <i class="fas fa-plus ml-2"></i>
+                        </button>
+                        <!--Submit-->
+                      
+                      </div>     
+                    </div>   
+
+
+              </div>
+              <!-- News jumbotron -->
+
+            </div>
+            <!--Grid column-->
+
+          </div>
+          <!--Grid row-->
+
+        </form>
+        <!--Form-->
+
+      </section>
+      <!--Section: Cards-->
+  
+  {{footer| safe}}
+  
+  <!-- Start your project here-->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static 'conference_room/js/jquery-3.4.1.min.js' %}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'conference_room/js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'conference_room/js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'conference_room/js/mdb.min.js' %}"></script>
+  <!-- My custom JavaScript-->
+  <script type="text/javascript">
+
+  function previewFile() {
+  
+    var preview = document.querySelector('#image_input_view') 
+    var file    = document.querySelector('#image_input_button').files[0];
+    var reader  = new FileReader();
+
+    ($('#image_input_text')[0]).value=file.name;
+
+    reader.addEventListener("load", function () {
+      preview.src = reader.result;
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+
+    $('#image_input_tmp_wrapper').attr("hidden","")
+    $('#image_input_view').removeAttr("hidden")
+  }
+  </script>
+</body>
+
+</html>
