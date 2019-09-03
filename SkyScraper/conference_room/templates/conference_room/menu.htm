@@ -1,4 +1,48 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>ConferenceRoomManager</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  {% load static %}
+  <link href="{% static 'conference_room/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'conference_room/css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{% static 'conference_room/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+      <a class="navbar-brand" href="/rooms/">
+        <img src="{% static 'conference_room/img/skyscraper.png' %}" height="40" alt="SkyScraper logo">
+      </a>
+      <a class="navbar-brand" href="/rooms/"><strong>Pokoje</strong></a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="reserve/">Rezerwacja</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="create/">Dodaj nową salę</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+  </header>
+  <!--Main Navigation-->
+
+  <div class="container">
 
       <!--Section: Cards-->
       <section class="text-center">
@@ -10,7 +54,7 @@
             <div class="col-md-6 mb-4">
 
               <!--Data-->
-              {data}
+              {{rooms| safe}}
               <!--Data-->
 
             </div>
@@ -21,3 +65,23 @@
       </section>
       <!--Section: Cards-->
 </div>
+
+  <!-- Start your project here-->
+  {{footer| safe}}
+  
+  <!-- Start your project here-->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static 'conference_room/js/jquery-3.4.1.min.js' %}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'conference_room/js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'conference_room/js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'conference_room/js/mdb.min.js' %}"></script>
+  <!-- My custom JavaScript-->
+  <script type="text/javascript" src="{% static 'conference_room/js/script.js' %}"></script>
+</body>
+
+</html>

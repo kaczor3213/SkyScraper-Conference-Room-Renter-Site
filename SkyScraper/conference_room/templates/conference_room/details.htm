@@ -50,6 +50,7 @@
     <!--Section: Cards-->
     <section class="text-center">
         <form method="post">
+          {% csrf_token %}
           <!--Grid row-->
           <div class="row mb-4 w-100 wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; animation-iteration-count: 1;">
   
@@ -69,7 +70,7 @@
   
                     <!-- Featured image -->
                     <div class="view overlay">
-                      <img src="/static/conference_room/img/rooms/sala_504.jpg" class="img-fluid">
+                      <img src="{% static 'conference_room/img/rooms/sala_504.jpg' %}" class="img-fluid">
                     </div>
   
                   </div>
@@ -92,7 +93,6 @@
                           <i class="fas fa-chevron-circle-left"></i>
                           Powrót do menu
                         </a>
-                        {% csrf_token %}
                         <button value="{{r_id}}" class="btn btn-success btn-md waves-effect waves-light" type="submit">Rezerwuj
                           <i class="fas fa-calendar-alt ml-2"></i>
                         </button>

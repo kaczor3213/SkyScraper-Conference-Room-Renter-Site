@@ -10,10 +10,6 @@ import re
 context = {}
 current_date = datetime.now().date()
 
-def load_main(template):
-    tmp_template = loader.get_template(template)
-    context['main'] = tmp_template.render()
-
 def give_status(room):
     if room.reservation_set.filter(date=current_date) == None:
         return True
@@ -26,8 +22,6 @@ def give_status(room):
 class RoomMenu(View):
 
     def get(self, request):
-
-        load_main("conference_room/menu.htm")
 
         room_context = {
             'r_id':'',
@@ -46,8 +40,8 @@ class RoomMenu(View):
             room_context['r_status'] = give_status(room)
             room_context['r_description'] = room.description
             rooms += template.render(room_context)
-        context['main'] = context['main'].format(data=rooms)
-        return render(request, 'conference_room/index.htm', context)
+        context['rooms'] = rooms
+        return render(request, 'conference_room/menu.htm', context)
     def post(self, request):
         raise Http404('Ups!, coś poszło nie tak...')
 
@@ -59,9 +53,10 @@ class RoomCreate(View):
 
     def post(self, request):
         for k, v in request.POST.items():
+            print(k, v)
             if v is None:
                 raise Http404("Some of the form input is empty!")
-        image = request.POST.get("image")
+        image = request.FILES['image']
         name = request.POST.get("name")
         capacity = request.POST.get("capacity")
         projector = request.POST.get("projector")
@@ -84,7 +79,7 @@ class RoomCreate(View):
             projector = bool(int(projector))
         except ValueError as e:
             raise Http404("Projector availability must be a boolean value!"+str(e))
-
+            
         try:
             Room.objects.create(name=name, capacity=capacity, projector=projector, description=description, image=request.FILES['image'])
         except Exception as e:
@@ -149,10 +144,69 @@ class RoomDetails(View):
 #widok edycji sali
 
 class RoomModify(View):
-    def get(self, request):
-        pass
-    def post(self, request):
-        pass
+   
+    def get(self, request, room_id):
+
+        room_context = {
+            'image':'',
+            'name':'',
+            'capacity':'',
+            'projector_yes':'',
+            'projector_no':'',
+            'description':'',
+            }
+
+        room = Room.objects.get(pk=room_id)
+
+        room_context['image'] = room.image
+        room_context['name'] = room.name
+        room_context['capacity'] = room.capacity
+        room_context['description'] = room.description
+        print(room.description)
+        if room.projector == True:
+            room_context['projector_yes'] = "checked"
+        else:
+            room_context['projector_no'] = "checked"
+
+
+        return render(request, 'conference_room/modify.htm', room_context)
+
+    def post(self, request, room_id):
+        for k, v in request.POST.items():
+            print(k, v)
+            if v is None:
+                raise Http404("Some of the form input is empty!")
+        image = request.FILES['image']
+        name = request.POST.get("name")
+        capacity = request.POST.get("capacity")
+        projector = request.POST.get("projector")
+        description = request.POST.get("descritpion")
+
+        #add result context
+        create_room_context = {
+            'approved_result': ''
+        }
+        #add image file validation
+
+        try:
+            capacity = int(capacity)
+            if capacity < 5:
+                raise ValueError("Given capacity of a room was lower than 5.")
+        except ValueError as e:
+            raise Http404("Capacity must be a digit number >=5.\n "+str(e))
+
+        try:
+            projector = bool(int(projector))
+        except ValueError as e:
+            raise Http404("Projector availability must be a boolean value!"+str(e))
+            
+        try:
+            Room.objects.filter(pk=room_id).update(name=name, capacity=capacity, projector=projector, description=description, image=request.FILES['image'])
+        except Exception as e:
+            raise Http404(str(e))
+        else:
+            return render(request, 'conference_room/create.htm', context)
+
 
 #widok rezerwacji sali
 #podać date rezerwacji -> walidacja, potwierdzenie

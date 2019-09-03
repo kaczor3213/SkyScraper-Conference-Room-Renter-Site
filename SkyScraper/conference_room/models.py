@@ -9,8 +9,6 @@ class Room(models.Model):
     capacity = models.IntegerField(default=15)
     projector = models.BooleanField(default=False)
 
-
-
 class Reservation(models.Model):
     date = models.DateField(auto_now=False, auto_now_add=False)
     notes = models.TextField()
